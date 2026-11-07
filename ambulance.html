@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ambulance | LifeLine Route</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header>
+    <p><a href="index.html">&larr; Back to roles</a></p>
+    <h1>Ambulance</h1>
+    <p>Pick the patient's condition and severity, then raise an SOS.</p>
+  </header>
+
+  <main>
+    <section class="panel">
+      <h2>Condition</h2>
+      <div class="choices" id="conditionChoices">
+        <button class="choice" data-value="Cardiac">Cardiac</button>
+        <button class="choice" data-value="Trauma">Trauma</button>
+        <button class="choice" data-value="Stroke">Stroke</button>
+        <button class="choice" data-value="Breathing">Breathing</button>
+        <button class="choice" data-value="Pregnancy">Pregnancy</button>
+        <button class="choice" data-value="Other">Other</button>
+      </div>
+
+      <h2>Severity</h2>
+      <div class="choices" id="severityChoices">
+        <button class="choice" data-value="Critical">Critical</button>
+        <button class="choice" data-value="Serious">Serious</button>
+        <button class="choice" data-value="Stable">Stable</button>
+      </div>
+
+      <button class="sos" id="sosButton">SOS</button>
+
+      <p class="result" id="result"></p>
+      <div id="match"></div>
+    </section>
+  </main>
+
+  <script src="js/data.js"></script>
+  <script src="js/ranking.js"></script>
+  <script src="js/trip.js"></script>
+  <script src="js/ambulance.js"></script>
+</body>
+</html>

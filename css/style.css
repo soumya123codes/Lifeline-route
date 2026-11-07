@@ -75,3 +75,199 @@ footer p {
 .ambulance { --color: var(--ambulance); }
 .hospital  { --color: var(--hospital); }
 .police    { --color: var(--police); }
+
+/* ---------- Ambulance page ---------- */
+.panel {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-top: 6px solid var(--ambulance);
+  border-radius: 12px;
+  padding: 18px;
+}
+
+.panel h2 {
+  margin: 16px 0 8px;
+  font-size: 18px;
+}
+
+.panel h2:first-child {
+  margin-top: 0;
+}
+
+.choices {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.choice {
+  font: inherit;
+  cursor: pointer;
+  background: transparent;
+  color: var(--text);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 10px 14px;
+}
+
+.choice:hover {
+  border-color: var(--ambulance);
+}
+
+.choice.selected {
+  background: var(--ambulance);
+  border-color: var(--ambulance);
+  color: #fff;
+  font-weight: 600;
+}
+
+.sos {
+  display: block;
+  width: 100%;
+  margin-top: 22px;
+  padding: 16px;
+  font: inherit;
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  color: #fff;
+  background: var(--ambulance);
+  border: 0;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.result {
+  margin: 14px 0 0;
+  min-height: 24px;
+  font-weight: 600;
+}
+
+.result.ok { color: var(--hospital); }
+.result.error { color: var(--ambulance); }
+
+/* ---------- Hospital page ---------- */
+.hospital-panel {
+  border-top-color: var(--hospital);
+}
+
+.table-scroll {
+  overflow-x: auto;
+}
+
+.bed-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 560px;
+}
+
+.bed-table th,
+.bed-table td {
+  text-align: left;
+  padding: 10px 8px;
+  border-bottom: 1px solid var(--line);
+  vertical-align: middle;
+}
+
+.bed-table th {
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.step {
+  font: inherit;
+  font-weight: 800;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  background: transparent;
+  color: var(--text);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+}
+
+.step:hover {
+  border-color: var(--hospital);
+  color: var(--hospital);
+}
+
+.count {
+  display: inline-block;
+  min-width: 34px;
+  text-align: center;
+  font-weight: 800;
+}
+
+.count.zero {
+  color: var(--ambulance);
+}
+
+/* ---------- Police page ---------- */
+.police-panel {
+  border-top-color: var(--police);
+}
+
+.empty,
+.muted {
+  color: var(--muted);
+}
+
+.alert-card {
+  background: var(--bg);
+  border-left: 5px solid var(--police);
+  border-radius: 8px;
+  padding: 12px 16px;
+  margin-bottom: 14px;
+}
+
+.alert-card h3 {
+  margin: 0 0 6px;
+}
+
+.alert-card p {
+  margin: 4px 0;
+}
+
+.action {
+  font: inherit;
+  font-weight: 800;
+  cursor: pointer;
+  color: #fff;
+  background: var(--police);
+  border: 0;
+  border-radius: 10px;
+  padding: 12px 16px;
+}
+
+.action.secondary {
+  background: transparent;
+  color: var(--text);
+  border: 1px solid var(--line);
+  font-weight: 600;
+}
+
+.badge {
+  display: inline-block;
+  background: var(--hospital);
+  color: #fff;
+  font-weight: 600;
+  border-radius: 99px;
+  padding: 4px 12px;
+}
+
+/* ---------- Chosen hospital card ---------- */
+.match-card {
+  background: var(--bg);
+  border-left: 5px solid var(--hospital);
+  border-radius: 8px;
+  padding: 12px 16px;
+  margin-top: 12px;
+}
+
+.match-card h3 {
+  margin: 0 0 6px;
+}
+
+.match-card p {
+  margin: 4px 0;
+}

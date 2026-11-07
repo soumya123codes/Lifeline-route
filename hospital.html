@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Hospital | LifeLine Route</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header>
+    <p><a href="index.html">&larr; Back to roles</a></p>
+    <h1>Hospital</h1>
+    <p>Update the number of free beds. Changes are saved in this browser and used by the ambulance page.</p>
+  </header>
+
+  <main>
+    <section class="panel hospital-panel">
+      <h2>Beds by hospital</h2>
+      <div class="table-scroll">
+        <table class="bed-table">
+          <thead>
+            <tr>
+              <th>Hospital</th>
+              <th>Specialities</th>
+              <th>ICU</th>
+              <th>Emergency</th>
+              <th>General</th>
+            </tr>
+          </thead>
+          <tbody id="hospitalRows"></tbody>
+        </table>
+      </div>
+      <p><button class="action secondary" id="resetBeds">Reset beds to start values</button></p>
+    </section>
+  </main>
+
+  <script src="js/data.js"></script>
+  <script src="js/hospital.js"></script>
+</body>
+</html>
