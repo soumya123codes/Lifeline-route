@@ -1,0 +1,396 @@
+@import url("https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Bungee&display=swap");
+
+/* ===== Colors: change the whole look from here ===== */
+:root {
+  --red: #d62828;
+  --red-dark: #9b1c1c;
+  --yellow: #ffc300;
+  --yellow-soft: #fff3c4;
+  --cream: #fffaf0;
+  --ink: #2b1a14;
+  --muted: #6b5a50;
+  --line: #e6d7b8;
+
+  --display: "Bungee", "Arial Black", Impact, sans-serif;
+  --body: "Atkinson Hyperlegible", system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--cream);
+  color: var(--ink);
+  font-family: var(--body);
+  line-height: 1.55;
+}
+
+h1, h2, h3 { font-weight: 400; }
+
+:focus-visible {
+  outline: 3px solid var(--red);
+  outline-offset: 3px;
+}
+
+/* ===== Header: red band with hazard-tape edge ===== */
+header {
+  background: var(--red);
+  color: #fff;
+  padding: 22px 16px 30px;
+  border-bottom: 12px solid var(--ink);
+  border-image: repeating-linear-gradient(
+    45deg, var(--yellow) 0 14px, var(--ink) 14px 28px
+  ) 12;
+}
+
+header > * {
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+header h1 {
+  margin-top: 0;
+  margin-bottom: 4px;
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: clamp(30px, 6vw, 48px);
+  line-height: 1.1;
+  letter-spacing: 0.01em;
+}
+
+header p {
+  margin-top: 0;
+  margin-bottom: 0;
+  color: #ffe9b0;
+}
+
+header p:has(.back-link) {
+  margin-bottom: 14px;
+}
+
+/* ===== Back to roles button ===== */
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--yellow);
+  color: var(--ink);
+  font-weight: 800;
+  font-size: 14px;
+  text-decoration: none;
+  padding: 8px 16px;
+  border: 2px solid var(--ink);
+  border-radius: 99px;
+  box-shadow: 3px 3px 0 var(--ink);
+  transition: transform 0.12s, box-shadow 0.12s;
+}
+
+.back-link:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 5px 5px 0 var(--ink);
+}
+
+.back-link:active {
+  transform: translate(2px, 2px);
+  box-shadow: 1px 1px 0 var(--ink);
+}
+
+main,
+footer {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px 16px;
+}
+
+main h2 {
+  font-family: var(--display);
+  font-size: 22px;
+  letter-spacing: 0.01em;
+}
+
+footer p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+/* ===== Role cards on the landing page ===== */
+.roles {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 18px;
+}
+
+.role {
+  display: block;
+  background: #fff;
+  color: var(--ink);
+  text-decoration: none;
+  border: 2px solid var(--ink);
+  border-top: 14px solid var(--color);
+  border-radius: 14px;
+  padding: 18px;
+  box-shadow: 6px 6px 0 var(--ink);
+  transition: transform 0.12s, box-shadow 0.12s;
+}
+
+.role:hover {
+  transform: translate(-3px, -3px);
+  box-shadow: 9px 9px 0 var(--ink);
+}
+
+.role h3 {
+  margin: 0 0 6px;
+  font-family: var(--display);
+  font-size: 22px;
+  line-height: 1.2;
+}
+
+.role h3::after { content: "  \2192"; }
+
+.role p {
+  margin: 0;
+  color: var(--muted);
+}
+
+.ambulance { --color: var(--red); }
+.hospital  { --color: var(--yellow); }
+.police    { --color: var(--red-dark); }
+
+/* ===== Panels (white cards) ===== */
+.panel {
+  --accent: var(--red);
+  background: #fff;
+  border: 2px solid var(--ink);
+  border-top: 12px solid var(--accent);
+  border-radius: 14px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 6px 6px 0 var(--ink);
+}
+
+.hospital-panel { --accent: var(--yellow); }
+.police-panel   { --accent: var(--red-dark); }
+
+.panel h2 {
+  margin: 18px 0 10px;
+  font-family: var(--display);
+  font-size: 20px;
+  line-height: 1.2;
+}
+
+.panel h2:first-child { margin-top: 0; }
+
+/* ===== Ambulance form ===== */
+.choices {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.choice {
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+  color: var(--ink);
+  background: #fff;
+  border: 2px solid var(--ink);
+  border-radius: 10px;
+  padding: 10px 16px;
+  transition: background 0.12s, transform 0.12s;
+}
+
+.choice:hover { background: var(--yellow-soft); }
+
+.choice.selected {
+  background: var(--red);
+  color: #fff;
+  box-shadow: 3px 3px 0 var(--ink);
+  transform: translate(-1px, -1px);
+}
+
+.sos {
+  display: block;
+  width: 100%;
+  margin-top: 26px;
+  padding: 18px;
+  font-family: var(--display);
+  font-size: 34px;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  color: #fff;
+  background: var(--red);
+  border: 3px solid var(--ink);
+  border-radius: 14px;
+  box-shadow: 0 7px 0 var(--red-dark), 0 7px 0 3px var(--ink);
+  cursor: pointer;
+  transition: transform 0.08s, box-shadow 0.08s;
+}
+
+.sos:hover { background: #e53535; }
+
+.sos:active {
+  transform: translateY(5px);
+  box-shadow: 0 2px 0 var(--red-dark), 0 2px 0 3px var(--ink);
+}
+
+/* ===== Messages ===== */
+.result {
+  margin: 16px 0 0;
+  font-weight: 700;
+}
+
+.result.ok {
+  background: var(--yellow-soft);
+  border-left: 6px solid var(--yellow);
+  border-radius: 8px;
+  padding: 10px 14px;
+}
+
+.result.error {
+  background: #ffe3e0;
+  border-left: 6px solid var(--red);
+  border-radius: 8px;
+  padding: 10px 14px;
+  color: var(--red-dark);
+}
+
+.empty,
+.muted { color: var(--muted); }
+
+/* ===== Cards inside panels ===== */
+.match-card,
+.alert-card {
+  border: 2px solid var(--ink);
+  border-radius: 10px;
+  padding: 14px 18px;
+  margin: 14px 0;
+}
+
+.match-card {
+  background: var(--yellow-soft);
+  border-left: 10px solid var(--yellow);
+}
+
+.alert-card {
+  background: #fff1ee;
+  border-left: 10px solid var(--red);
+}
+
+.match-card h3,
+.alert-card h3 {
+  margin: 0 0 6px;
+  font-family: var(--display);
+  font-size: 19px;
+  line-height: 1.25;
+}
+
+.match-card p,
+.alert-card p { margin: 4px 0; }
+
+/* ===== Buttons ===== */
+.action {
+  font: inherit;
+  font-weight: 800;
+  cursor: pointer;
+  color: #fff;
+  background: var(--red);
+  border: 2px solid var(--ink);
+  border-radius: 10px;
+  padding: 12px 18px;
+  box-shadow: 3px 3px 0 var(--ink);
+  transition: transform 0.12s, box-shadow 0.12s;
+}
+
+.action:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 5px 5px 0 var(--ink);
+}
+
+.action:active {
+  transform: translate(2px, 2px);
+  box-shadow: 1px 1px 0 var(--ink);
+}
+
+.action.secondary {
+  color: var(--ink);
+  background: #fff;
+}
+
+.action.secondary:hover { background: var(--yellow); }
+
+.badge {
+  display: inline-block;
+  background: var(--yellow);
+  color: var(--ink);
+  font-weight: 800;
+  border: 2px solid var(--ink);
+  border-radius: 99px;
+  padding: 4px 14px;
+}
+
+/* ===== Hospital bed table ===== */
+.table-scroll { overflow-x: auto; }
+
+.bed-table {
+  width: 100%;
+  min-width: 560px;
+  border-collapse: collapse;
+}
+
+.bed-table th,
+.bed-table td {
+  text-align: left;
+  padding: 12px 8px;
+  border-bottom: 1px solid var(--line);
+  vertical-align: middle;
+}
+
+.bed-table th {
+  background: var(--yellow);
+  color: var(--ink);
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border-bottom: 2px solid var(--ink);
+}
+
+.bed-table tbody tr:hover { background: var(--yellow-soft); }
+
+.step {
+  font: inherit;
+  font-weight: 800;
+  width: 34px;
+  height: 34px;
+  cursor: pointer;
+  color: var(--ink);
+  background: #fff;
+  border: 2px solid var(--ink);
+  border-radius: 8px;
+}
+
+.step:hover { background: var(--yellow); }
+
+.count {
+  display: inline-block;
+  min-width: 38px;
+  text-align: center;
+  font-size: 18px;
+  font-weight: 800;
+}
+
+.count.zero { color: var(--red); }
+
+/* ===== Map ===== */
+.map-panel { margin-top: 0; }
+
+.map {
+  height: 380px;
+  border: 3px solid var(--ink);
+  border-radius: 10px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; }
+}

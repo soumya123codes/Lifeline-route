@@ -1,5 +1,8 @@
 const alertBox = document.getElementById("alertBox");
 
+// The map is built once Firebase is ready
+let view = null;
+
 // Draw the alert (or the empty message) from a trip object
 function showAlert(trip) {
   if (!trip) {
@@ -8,7 +11,6 @@ function showAlert(trip) {
   }
 
   const time = new Date(trip.createdAt).toLocaleTimeString();
-  const acknowledged = trip.status === "police_ack";
 
   let html =
     '<div class="alert-card">' +
@@ -19,32 +21,44 @@ function showAlert(trip) {
       '<p class="muted">SOS raised at ' + time + "</p>" +
     "</div>";
 
-  if (acknowledged) {
+  if (trip.status === "sent") {
+    html += '<button class="action" id="ackButton">Acknowledge and clear route</button>';
+  } else if (trip.status === "police_ack") {
     html +=
       '<p><span class="badge">Route being cleared</span></p>' +
       '<button class="action secondary" id="clearButton">Clear alert</button>';
   } else {
-    html += '<button class="action" id="ackButton">Acknowledge and clear route</button>';
+    html +=
+      '<p><span class="badge">Ambulance arrived</span></p>' +
+      '<button class="action secondary" id="clearButton">Clear alert</button>';
   }
 
   alertBox.innerHTML = html;
 }
 
+// Update the alert and the map together
+function refresh(trip) {
+  showAlert(trip);
+  showTripOnMap(view, trip);
+}
+
 // Handle clicks on the buttons inside the alert box
 alertBox.addEventListener("click", function (event) {
   if (event.target.id === "ackButton") {
-    updateTripStatus("police_ack");
-    showAlert(loadTrip());
+    refresh(updateTripStatus("police_ack"));
   }
 
   if (event.target.id === "clearButton") {
     clearTrip();
-    showAlert(null);
+    refresh(null);
   }
 });
 
-// Show whatever trip exists when the page opens
-showAlert(loadTrip());
+// Start once Firebase has sent the first data
+whenReady(function () {
+  view = createLifelineMap("map");
+  refresh(loadTrip());
 
-// Update live when the ambulance page sends a new SOS
-onTripChange(showAlert);
+  // Update live when any device changes the trip
+  onTripChange(refresh);
+});

@@ -271,3 +271,14 @@ footer p {
 .match-card p {
   margin: 4px 0;
 }
+
+/* ---------- Map ---------- */
+.map-panel {
+  margin-top: 14px;
+}
+
+.map {
+  height: 380px;
+  border-radius: 8px;
+  border: 1px solid var(--line);
+}

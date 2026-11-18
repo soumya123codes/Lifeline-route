@@ -4,6 +4,12 @@
 
 const ambulanceStart = { x: 2, y: 7 };
 
+// Where the map is centred, as latitude and longitude.
+// This is a placeholder. Change both numbers to a spot in YOUR demo city
+// (on Google Maps, right-click a spot and click the numbers to copy them).
+// The hospital x and y values below are measured in km from this point.
+const MAP_CENTER = { lat: 28.6139, lng: 77.2090 };
+
 const defaultHospitals = [
   {
     id: "h1",
@@ -45,22 +51,19 @@ const conditionNeeds = {
   Other:     { speciality: "emergency",  bed: "emergency" }
 };
 
-// ---- Saving beds in the browser so every page sees the same numbers ----
-const HOSPITALS_KEY = "lifelineHospitals";
+// ---- Beds are stored in Firebase (see firebase.js) ----
+let hospitals = JSON.parse(JSON.stringify(defaultHospitals));
 
 function loadHospitals() {
-  const raw = localStorage.getItem(HOSPITALS_KEY);
-  if (raw) return JSON.parse(raw);
-  return JSON.parse(JSON.stringify(defaultHospitals)); // a fresh copy
+  return hospitalsCache || JSON.parse(JSON.stringify(defaultHospitals));
 }
 
 function saveHospitals() {
-  localStorage.setItem(HOSPITALS_KEY, JSON.stringify(hospitals));
+  hospitalsCache = hospitals;
+  db.ref("hospitals").set(hospitals);
 }
 
 function resetHospitals() {
-  localStorage.removeItem(HOSPITALS_KEY);
-  hospitals = loadHospitals();
+  hospitals = JSON.parse(JSON.stringify(defaultHospitals));
+  saveHospitals();
 }
-
-let hospitals = loadHospitals();

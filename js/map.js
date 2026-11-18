@@ -1,10 +1,10 @@
 // Shared map code (uses the Leaflet library).
 
-const HOSPITAL_COLOR = "#0b7a75";
-const AMBULANCE_COLOR = "#d6342c";
+const HOSPITAL_COLOR = "#ffc300";
+const AMBULANCE_COLOR = "#d62828";
 
-const hospitalStyle = { radius: 9, color: "#ffffff", weight: 2, fillColor: HOSPITAL_COLOR, fillOpacity: 0.95 };
-const chosenStyle   = { radius: 13, color: "#16211f", weight: 3, fillColor: HOSPITAL_COLOR, fillOpacity: 1 };
+const hospitalStyle = { radius: 9, color: "#2b1a14", weight: 2, fillColor: HOSPITAL_COLOR, fillOpacity: 0.95 };
+const chosenStyle   = { radius: 13, color: "#d62828", weight: 4, fillColor: HOSPITAL_COLOR, fillOpacity: 1 };
 
 // Turn our km grid position into a latitude and longitude
 function kmToLatLng(point) {

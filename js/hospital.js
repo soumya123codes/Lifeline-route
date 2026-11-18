@@ -1,4 +1,57 @@
 const rows = document.getElementById("hospitalRows");
+const incomingBox = document.getElementById("incomingBox");
+
+// The map is built once Firebase is ready
+let view = null;
+
+// ---------- Incoming ambulance ----------
+
+// Draw the incoming ambulance card (or the empty message)
+function showIncoming(trip) {
+  if (!trip) {
+    incomingBox.innerHTML = '<p class="empty">No ambulance on the way.</p>';
+    return;
+  }
+
+  const need = conditionNeeds[trip.condition];
+  const arrived = trip.status === "reached";
+  const minutesLeft = Math.max(0, Math.round(trip.etaMinutes * (1 - (trip.progress || 0))));
+
+  let html =
+    '<div class="alert-card">' +
+      "<h3>" + trip.severity + " " + trip.condition + "</h3>" +
+      "<p>Heading to <strong>" + trip.hospitalName + "</strong>.</p>" +
+      "<p>" + (arrived ? "<strong>The ambulance has arrived.</strong>" : "ETA about <strong>" + minutesLeft + " min</strong>") + "</p>" +
+      '<p class="muted">Prepare: ' + need.bed + " bed, " + need.speciality + " team.</p>";
+
+  if (trip.status === "police_ack") {
+    html += '<p class="muted">Traffic police are clearing the route.</p>';
+  }
+
+  html += "</div>";
+
+  if (trip.preRegistered) {
+    html += '<p><span class="badge">Patient pre-registered</span></p>';
+  } else {
+    html += '<button class="action" id="preRegisterButton">Pre-register patient</button>';
+  }
+
+  incomingBox.innerHTML = html;
+}
+
+// Update the card and the map together
+function refresh(trip) {
+  showIncoming(trip);
+  showTripOnMap(view, trip);
+}
+
+incomingBox.addEventListener("click", function (event) {
+  if (event.target.id === "preRegisterButton") {
+    refresh(updateTrip({ preRegistered: true }));
+  }
+});
+
+// ---------- Bed table ----------
 
 // Build the HTML for one bed cell: [-] number [+]
 function bedCell(hospital, bedType) {
@@ -57,4 +110,13 @@ document.getElementById("resetBeds").addEventListener("click", function () {
   showHospitals();
 });
 
-showHospitals();
+// ---------- Start once Firebase has sent the first data ----------
+whenReady(function () {
+  view = createLifelineMap("map");
+  showHospitals();
+  refresh(loadTrip());
+
+  // Update live when any device changes the trip or the beds
+  onTripChange(refresh);
+  onHospitalsChange(showHospitals);
+});
